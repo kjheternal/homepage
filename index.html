@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="common.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <div id="mainLayout">
+        <div id="login">
+            <form>
+                <input id="login_id" type="text" placeholder="아이디"><br>
+                <input id="login_pw" type="password" placeholder="비밀번호"><br>
+
+                <input id="login_confirm" value="로그인" type="button" onclick="loginConfirm();">
+                
+                <a href = "reg_member.html">
+                    <input id="login_register" value="회원가입" type="button">
+                </a>
+            </form>
+        </div>
+
+        <p id="currentDate"></p>
+
+        <p id="currentTime"></p>
+
+        <div id="popupWindow">
+            <img id="cat_img" src="cat.jpg">
+            <p id="popupText">팝업 영역 테스트</p>
+
+            <input id="popup_CloseButton" value="팝업 닫기" type="button">
+        </div>
+    </div>
+</body>
+</html>
+
+
+<!-- <!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <script src="a.js"> </script>
+        <title>DOM</title>
+    </head>
+    <body>
+        // id	pw	를 입력 받는 폼을 만들기		
+        <form>
+            id:<input id="id">
+            pw:<input id="pw">
+            <input type="button" onclick="login()" value="로그인">
+        </form>
+
+    </body>
+</html> -->

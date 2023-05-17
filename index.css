@@ -1,0 +1,92 @@
+body {
+    background-image: url('bg_img.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#mainLayout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+}
+
+#login {
+    background-color: darkturquoise;
+    width: 420px;
+    height: 210px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 25%;
+
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 10px;
+
+    box-shadow: 5px 5px 5px;
+}
+
+#popupWindow {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+
+    width: auto;
+    height: auto;
+
+    position: absolute;
+    top: 15%;
+
+    border-style: dashed;
+    border-color: rgb(255, 0, 170);
+    border-width: 2px;
+    border-radius: 50px;
+
+    box-shadow: 5px 5px 5px;
+
+    transition: height 0.5s;
+
+    /* 투명도 조절 */
+    opacity:0.95;
+
+    /* 넘치는부분 자르기 */
+    overflow: hidden;
+}
+
+#cat_img {
+    position: relative;
+}
+
+#popupText {
+    background-image: linear-gradient(45deg, Violet, Orange);
+    text-align: center;
+
+    position: absolute;
+    top: 10%;
+    left: 38%;
+}
+
+#popup_CloseButton {
+    background-image: linear-gradient(45deg, Violet, Orange);
+    position: absolute;
+    bottom: 2%;
+    left: 42%;
+}
+
+#currentDate {
+    position: absolute;
+    top: 27%;
+}
+
+#currentTime {
+    position: absolute;
+    top: 30%;
+}
