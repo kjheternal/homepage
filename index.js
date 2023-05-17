@@ -122,6 +122,7 @@ function updateTime() {
 
     var dateText = document.getElementById("currentDate");
     // 시, 분, 초 변수
+    var hoursStr = "";
     var hours = currentTime.getHours();
     var minutes = currentTime.getMinutes();
     var seconds = currentTime.getSeconds();
@@ -129,17 +130,29 @@ function updateTime() {
 
     var timeText = document.getElementById("currentTime");
 
+    // 시간 표기 변경 ( 13시 = PM 1시 )
+    if ( hours >= 12 ) {
+        hoursStr = "오후 ";
+
+        if ( hours != 12 ) {
+            hours = hours - 12;
+        }
+    } else {
+        hoursStr = "오전 ";
+    }
+
     // 0을 채워 넣어 한 자리 숫자를 두 자리로 변환
     hours = (hours < 10 ? "0" : "") + hours;
     minutes = (minutes < 10 ? "0" : "") + minutes;
     seconds = (seconds < 10 ? "0" : "") + seconds;
 
-    // 0을 채워 넣어 1,2자리 숫자를 3자리로 변환
-    milSeconds = (milSeconds < 100 ? "0" : "") + milSeconds;
+    // 0을 2개 채워 넣어 한자리 숫자를 세 자리로 변환 | 두 자리 숫자는 0을 1개 채워넣기
+    milSeconds = (milSeconds < 10 ? "00" : "") + milSeconds;
+    milSeconds = (milSeconds >= 10 && milSeconds < 100 ? "0" : "") + milSeconds;
 
     dateText.textContent = year + "년 " + month + "월 " + date + "일 " + dayStr;
 
-    var formattedTime = hours + ":" + minutes + ":" + seconds + "." + milSeconds;
+    var formattedTime = hoursStr + hours + "시 " + minutes + "분 " + seconds + "초 " + milSeconds;
     timeText.textContent = formattedTime;
 }
 
