@@ -2,6 +2,9 @@ body {
     background-image: url('bg_img.png');
     background-repeat: no-repeat;
     background-size: cover;
+    
+    /* 창 크기를 줄였을때 이미지 하단영역에 공백이 생기는 문제 수정 */
+    height: 100vh;
 }
 
 #mainLayout {
