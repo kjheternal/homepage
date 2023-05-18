@@ -1,0 +1,6 @@
+.rpg_screenarea {
+    background-color: rgba(5, 248, 155, 0.712);
+    width: 25%;
+    height: 30em;
+    resize: none;
+}
