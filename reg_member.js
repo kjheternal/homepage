@@ -1,27 +1,11 @@
 /*
-    -> 문제 79 ~ 82
-
-    // 이전 문제와 계속 이어감
-
-    1.html 에서 이 입력 항목들은 글자수를 제한하여 입력하게 처리하기
-    2.js 에서 입력 값들을 검사 처리
-
-    입력한 값들을 팝업에 출력
-
-    암호와 재확인 암호가 같은지도 체크 처리
-    각 체크에 대해 성공 실패 여부를 로그 남기기
-
-    // 안했음
-    1.github에 런칭
-    2.url 링크 걸기
-
-    TODO: 전체적으로 리마인드하고 주석으로 어떻게 돌아가는지 파악하기
+    
 */
 
 // 회원가입 폼태그 불러오기
 var reg_ID, reg_PW, reg_PWRE, reg_NAME, reg_EMAIL;
 
-var reg_BirthY, reg_BirthM, reg_BirthD;
+var reg_BirthDay;
 
 var TEL_1, TEL_2, TEL_3;
 
@@ -35,9 +19,7 @@ window.onload = function() {
     reg_NAME = document.getElementById("reg_name");
     reg_EMAIL = document.getElementById("reg_email");
 
-    reg_BirthY = document.getElementById("reg_birthyear");
-    reg_BirthM = document.getElementById("reg_birthmonth");
-    reg_BirthD = document.getElementById("reg_birthday");
+    reg_BirthDay = document.getElementById("reg_birthday_total");
 
     TEL_1 = document.getElementById("tel_1");
     TEL_2 = document.getElementById("tel_2");
@@ -45,6 +27,52 @@ window.onload = function() {
 
     Gender = document.getElementsByName("sex");  // 주의
 
+}
+
+
+// onchange 이벤트를 활용해서 입력값을 불러와서 조건이 일치하면 초록색 아니면 빨간색으로 바뀌는 함수
+function colorChange() {
+    var ID = reg_ID.value;
+    var PW = reg_PW.value;
+    var PWRE = reg_PWRE.value;
+
+    var PWCheck = false;
+
+    // 아이디 정규표현식 ( 영문, 숫자 대소문자만 )
+    var idPattern = /^[a-zA-Z0-9]+$/;
+    var isValidID = idPattern.test(ID);
+
+    // 비밀번호 정규표현식 ( 최소 8자리에서 최대 16자리까지 숫자, 영문, 특수문자 각 1개 이상 포함 )
+    var pwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
+    var isValidPassword = pwPattern.test(PW);
+    
+    if ( isValidID ) {
+        // 최소, 최대 길이 조건 체크
+        if ( ID.length >= 4 && ID.length <= 12 ) {
+            reg_ID.style.borderColor = "green";
+        }
+    } else {
+        reg_ID.style.borderColor = "red";
+    }
+
+    if ( isValidPassword ) {
+        // if ( PW.length >= 4 && PW.length <= 16 ) {
+            reg_PW.style.borderColor = "green";
+            PWCheck = true;
+        // }
+    } else {
+        reg_PW.style.borderColor = "red";
+        PWCheck = false;
+    }
+
+    if ( PWCheck ) {
+        // 비밀번호와 비밀번호 재입력값이 일치하지 않은 경우
+        if ( PW != PWRE ) {
+            reg_PWRE.style.borderColor = "red";
+        } else {
+            reg_PWRE.style.borderColor = "green";
+        }
+    }
 }
 
 
@@ -57,9 +85,7 @@ function confirmRegister() {
     var NAME = reg_NAME.value;
     var EMAIL = reg_EMAIL.value;
 
-    var RBY = reg_BirthY.value;
-    var RBM = reg_BirthM.value;
-    var RBD = reg_BirthD.value;
+    var rbTotal = reg_BirthDay.value;
 
     var TELOne = TEL_1.value;
     var TELTwo = TEL_2.value;
@@ -90,7 +116,7 @@ function confirmRegister() {
         +"비밀번호 재입력: "+PWRE+"\n"
         +"이름: "+NAME+"\n"
         +"이메일: "+EMAIL+"\n"
-        +"생년월일: " + RBY + "년 " + RBM + "월 " + RBD + "일\n"
+        +"생년월일: " +rbTotal+"\n"
         +"전화번호: " + TELOne + " - " + TELTwo + " - " + TELThree + "\n"
         +"성별: " + sexStr ;
 
@@ -103,13 +129,21 @@ function confirmRegister() {
     var NAMECheck = false;
     var EMAILCheck = false;
 
+    // 아이디 정규표현식 ( 영문, 숫자 대소문자만 )
+    var idPattern = /^[a-zA-Z0-9]+$/;
+    var isValidID = idPattern.test(ID);
+
     // 비밀번호 정규표현식 ( 최소 8자리에서 최대 16자리까지 숫자, 영문, 특수문자 각 1개 이상 포함 )
     var pwPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
     var isValidPassword = pwPattern.test(PW);
     
-    // 최소, 최대 길이 조건 체크
-    if ( ID.length >= 4 && ID.length <= 12 ) {
-        IDCheck = true;
+    if ( isValidID ) {
+        // 최소, 최대 길이 조건 체크
+        if ( ID.length >= 4 && ID.length <= 12 ) {
+            IDCheck = true;
+        }
+    } else {
+        IDCheck = false;
     }
 
     if ( isValidPassword ) {
@@ -120,8 +154,7 @@ function confirmRegister() {
         PWCheck = false;
     }
 
-    if ( PWCheck && isValidPassword ) {
-
+    if ( PWCheck ) {
         // 비밀번호와 비밀번호 재입력값이 일치하지 않은 경우
         if ( PW != PWRE ) {
             alert("비밀번호 재입력을 똑바로 입력해주세요.");
@@ -132,9 +165,6 @@ function confirmRegister() {
         } else {
             PWRECheck = true;
         }
-
-    } else {
-        PWRECheck = false;
     }
 
     if ( NAME.length >= 4 && NAME.length <= 12 ) {
@@ -155,7 +185,7 @@ function confirmRegister() {
     // 일치하지 않은 경우 오류 메시지 출력
     if ( !register ) {
         if ( !IDCheck ) {
-            alert("아이디는 4글자이상 12자 이하로만 입력하세요");
+            alert("아이디는 4글자이상 12자 이하까지 영문 대소문자, 숫자만 써서 입력하세요");
         } else if ( !PWCheck ) {
             alert("비밀번호는 최소 8자리에서 최대 16자리까지 숫자, 영문, 특수문자 각 1개 이상 포함되게 입력해주세요.");
         } else if ( !NAMECheck ) {
