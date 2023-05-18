@@ -1,25 +1,4 @@
 /*
-    -> 문제 86 ~ 90
-
-    // 86-87번
-    1.4단 화면 그리기 상단,좌,우,하
-    2.div  absolute 로 가운데에 팝업 영역 만들기
-    3. 2번에 닫기 버튼을 놓고 버튼이 눌리면 팝업 창이 닫히게
-    닫기 버튼을 누르면 팝업 폭과 높이 색상이 천천히 바뀌게
-
-    // 88-89번
-
-    깃 소스 확인 88 참고
-
-    오늘 날짜와 현재 시간을 다음 형식으로 출력하기
-    ㅇㅇㅇㅇ년 ㅇㅇ월 ㅇㅇ일 ㅇㅇ시 ㅇㅇ분 ㅇㅇ초 ㅇㅇㅇ 밀리초
-    참고
-
-    밀리초: 1/1000 초
-
-    // 90번
-
-    문89 에서 추가한 시간 출력 기능을 내 홈피 첫화면 (로그인 화면) 에 나오게 하기
 
 */
 
@@ -46,6 +25,7 @@ window.onload = function() {
 
     popupTextTag = document.getElementById("popupText");
 
+    // 이벤트를 감지하는 감지기 ( 버튼을 클릭했을때 )
     btnTag.addEventListener("click",popup);
 
     // 초기 시간 설정
@@ -66,6 +46,8 @@ function loginConfirm() {
         alert("로그인 성공!");
 
         divTag.innerHTML = ID + " 회원님 반갑습니다!";
+        divTag.innerHTML = divTag.innerHTML + "<hr>";
+        divTag.innerHTML = divTag.innerHTML + "<input id='go_rpggame' value='RPG v0.10.0 플레이' type='button' onclick='goRPG();'>"
     } else {
         alert("로그인 실패...");
     }
@@ -154,6 +136,10 @@ function updateTime() {
 
     var formattedTime = hoursStr + hours + "시 " + minutes + "분 " + seconds + "초 " + milSeconds;
     timeText.textContent = formattedTime;
+}
+
+function goRPG() {
+    location.href = "game_main.html";
 }
 
 /* 
