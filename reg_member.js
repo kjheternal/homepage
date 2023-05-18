@@ -50,6 +50,8 @@ function colorChange() {
         // 최소, 최대 길이 조건 체크
         if ( ID.length >= 4 && ID.length <= 12 ) {
             reg_ID.style.borderColor = "green";
+        } else {
+            reg_ID.style.borderColor = "red";
         }
     } else {
         reg_ID.style.borderColor = "red";
