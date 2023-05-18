@@ -143,6 +143,8 @@ function confirmRegister() {
         // 최소, 최대 길이 조건 체크
         if ( ID.length >= 4 && ID.length <= 12 ) {
             IDCheck = true;
+        } else {
+            IDCheck = false;
         }
     } else {
         IDCheck = false;
